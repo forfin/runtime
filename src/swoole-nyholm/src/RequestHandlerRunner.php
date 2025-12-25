@@ -73,7 +73,6 @@ class RequestHandlerRunner implements RunnerInterface
             }
         }
 
-
         $body = $psrResponse->getBody();
         $body->rewind();
 
