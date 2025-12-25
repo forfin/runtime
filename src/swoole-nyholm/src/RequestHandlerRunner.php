@@ -50,10 +50,23 @@ class RequestHandlerRunner implements RunnerInterface
 
         $response->setStatusCode($psrResponse->getStatusCode(), $psrResponse->getReasonPhrase());
 
-        foreach ($psrResponse->getHeaders() as $name => $values) {
+        foreach ($psrResponse->allPreserveCaseWithoutCookies() as $name => $values) {
             foreach ($values as $value) {
                 $response->setHeader($name, $value);
             }
+        }
+
+        foreach ($psrResponse->headers->getCookies() as $cookie) {
+            $response->cookie(
+                $cookie->getName(),
+                $cookie->getValue() ?? '',
+                $cookie->getExpiresTime(),
+                $cookie->getPath(),
+                $cookie->getDomain() ?? '',
+                $cookie->isSecure(),
+                $cookie->isHttpOnly(),
+                $cookie->getSameSite() ?? ''
+            );
         }
 
         $body = $psrResponse->getBody();
