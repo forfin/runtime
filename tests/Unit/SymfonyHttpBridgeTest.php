@@ -73,9 +73,9 @@ class SymfonyHttpBridgeTest extends TestCase
 
         $response = $this->createMock(Response::class);
         $expectedHeaders = [
-            ['x-test', 'Swoole-Runtime'],
-            ['set-cookie', $fooCookie],
-            ['set-cookie', $barCookie],
+            ['X-Test', 'Swoole-Runtime'],
+            ['Set-Cookie', $fooCookie],
+            ['Set-Cookie', $barCookie],
         ];
         $callCount = 0;
         $response->expects(self::exactly(3))->method('header')
