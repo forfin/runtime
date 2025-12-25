@@ -54,5 +54,31 @@
     <InvalidScalarArgument>
       <code><![CDATA[$sfResponse->getStatusCode()]]></code>
     </InvalidScalarArgument>
+    <TooManyArguments>
+      <code><![CDATA[$response->cookie]]></code>
+    </TooManyArguments>
+    <InvalidScalarArgument>
+      <code><![CDATA[$cookie->getExpiresTime()]]></code>
+    </InvalidScalarArgument>
+    <InvalidScalarArgument>
+      <code><![CDATA[$cookie->isHttpOnly()]]></code>
+    </InvalidScalarArgument>
+    <InvalidScalarArgument>
+      <code><![CDATA[$cookie->getSameSite()]]></code>
+    </InvalidScalarArgument>
+  </file>
+  <file src="src/swoole-nyholm/src/RequestHandlerRunner.php">
+    <TooManyArguments>
+      <code><![CDATA[$response->cookie]]></code>
+    </TooManyArguments>
+    <InvalidScalarArgument>
+      <code><![CDATA[$cookie->getExpiresTime()]]></code>
+    </InvalidScalarArgument>
+    <InvalidScalarArgument>
+      <code><![CDATA[$cookie->isHttpOnly()]]></code>
+    </InvalidScalarArgument>
+    <InvalidScalarArgument>
+      <code><![CDATA[$cookie->getSameSite()]]></code>
+    </InvalidScalarArgument>
   </file>
 </files>
