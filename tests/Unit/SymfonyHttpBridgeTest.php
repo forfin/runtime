@@ -74,15 +74,27 @@ class SymfonyHttpBridgeTest extends TestCase
         $response = $this->createMock(Response::class);
         $expectedHeaders = [
             ['X-Test', 'Swoole-Runtime'],
-            ['Set-Cookie', $fooCookie],
-            ['Set-Cookie', $barCookie],
         ];
         $callCount = 0;
-        $response->expects(self::exactly(3))->method('header')
+        $response->expects(self::exactly(1))->method('header')
             ->willReturnCallback(function ($key, $value) use ($expectedHeaders, &$callCount) {
                 $this->assertArrayHasKey($callCount, $expectedHeaders);
                 $this->assertEquals($expectedHeaders[$callCount][0], $key);
                 $this->assertEquals($expectedHeaders[$callCount][1], $value);
+                ++$callCount;
+
+                return true;
+            });
+        $expectedCookies = [
+            ['foo', '123'],
+            ['bar', '234'],
+        ];
+        $callCount = 0;
+        $response->expects(self::exactly(2))->method('cookie')
+            ->willReturnCallback(function ($name, $value) use ($expectedCookies, &$callCount) {
+                $this->assertArrayHasKey($callCount, $expectedCookies);
+                $this->assertEquals($expectedCookies[$callCount][0], $name);
+                $this->assertEquals($expectedCookies[$callCount][1], $value);
                 ++$callCount;
 
                 return true;
