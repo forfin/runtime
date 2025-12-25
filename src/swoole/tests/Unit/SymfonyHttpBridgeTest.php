@@ -9,9 +9,9 @@ use Swoole\Http\Response;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
@@ -64,7 +64,7 @@ class SymfonyHttpBridgeTest extends TestCase
         $barCookie = (string) new Cookie('bar', '234');
 
         $sfResponse = $this->createMock(SymfonyResponse::class);
-        $sfResponse->headers = new HeaderBag([
+        $sfResponse->headers = new ResponseHeaderBag([
             'X-Test' => 'Swoole-Runtime',
             'Set-Cookie' => [$fooCookie, $barCookie],
         ]);
